@@ -4,12 +4,11 @@
 using namespace std;
 
 
-string encryptdecrpyt(string data){
-    char key='k';
+void encryptdecrpyt(string &data){
+    const char key='k';
     for (int i = 0; i < data.length(); i++){
         data[i]=data[i]^key;
     }
-    return data;
 }
 
 void addpass(){
@@ -22,7 +21,9 @@ void addpass(){
         cin>>user;
         cout<<"enter password:";
         cin>>pass;
-        file<<site<<" "<<encryptdecrpyt(user)<<" "<<encryptdecrpyt(pass);
+        encryptdecrpyt(user);
+        encryptdecrpyt(pass);
+        file<<site<<" "<<user<<" "<<pass;
     }
     file.close();
     cout<<"Saved";
@@ -34,8 +35,10 @@ void viewpass(){
     while (file>>site>>user>>pass)
     {
         cout<<"\nsite: "<<site<<endl;
-        cout<<"\nusername: "<<encryptdecrpyt(user)<<endl;
-        cout<<"\nPassword: "<<encryptdecrpyt(pass)<<endl;
+        encryptdecrpyt(user);
+        encryptdecrpyt(pass);
+        cout<<"\nusername: "<<user<<endl;
+        cout<<"\nPassword: "<<pass<<endl;
     }
     file.close();
 }
